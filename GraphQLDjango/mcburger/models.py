@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import CASCADE
 
 
 class Category(models.Model):
@@ -26,6 +27,9 @@ class Product(models.Model):
     name = models.CharField(max_length=150, unique=True)
     price = models.FloatField()
     ingredients = models.ManyToManyField(Ingredient)
+    category = models.ForeignKey(Category,
+                                 related_name="products",
+                                 on_delete=CASCADE)
 
     class Meta:
         ordering = ['name']
